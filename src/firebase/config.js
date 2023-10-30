@@ -1,6 +1,6 @@
-import * as firebase from "firebase/app";
-import 'firebase/storage';
-import 'firebase/firestore'
+import firebase from "firebase/compat/app";
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMn2ryAx_LHqklZDxjaSOnZvKt4-Kibyw",
@@ -11,9 +11,10 @@ const firebaseConfig = {
   appId: "1:270333970918:web:94daedaa7e41e5b6146e27"
 };
 
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-const projectStorage = firebase.storage()
-const projectFirestore = firebase.firestore()
+const projectStorage = firebaseApp.storage();
+const projectFirestore = firebaseApp.firestore();
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export {projectStorage, projectFirestore}
+export {projectStorage, projectFirestore, timestamp}
