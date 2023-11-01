@@ -7,16 +7,18 @@ const useFirestore = (collection) => {
     useEffect(() => {
         const unsub = projectFirestore.collection(collection)
            .orderBy('createdAt', 'desc')
-           .onSnapshot((snap) => {
+           .onSnapshot(snap => {
               let documents = [];
               snap.forEach(doc => {
-                documents.puch({...doc.data(), id: doc.id});
-              })
+                documents.push({...doc.data(), id: doc.id});
+              });
               setDocs(documents);
-           })
+           });
         return () => unsub();
-        
-    }, [collection])
+
+    }, [collection]);
 
     return {docs};
 }
+
+export default useFirestore;
